@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
-import Radium, { StyleRoot } from "radium";
 
 class App extends Component {
   state = {
@@ -58,12 +57,7 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer",
-      // using Radium to add css psuedo class
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
+      cursor: "pointer"
     };
 
     let persons = null; // no persons showing
@@ -103,11 +97,6 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = "red";
-      // using Radium apply updated hover styles to style object
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      };
     }
 
     const classes = [];
@@ -120,23 +109,19 @@ class App extends Component {
     }
 
     return (
-      // wrap app in StyleRoot from Radium to be able to use advanced css features like media queries
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I am a React App!</h1>
-          <p className={classes.join(" ")}>This is really working!</p>
-          <button
-            style={style} // add style object
-            onClick={this.togglePersonsHandler}
-          >
-            Toggle Persons
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I am a React App!</h1>
+        <p className={classes.join(" ")}>This is really working!</p>
+        <button
+          style={style} // add style object
+          onClick={this.togglePersonsHandler}
+        >
+          Toggle Persons
+        </button>
+        {persons}
+      </div>
     );
   }
 }
 
-export default Radium(App);
-// call Radium as a function and wrap the app with it
+export default App;
