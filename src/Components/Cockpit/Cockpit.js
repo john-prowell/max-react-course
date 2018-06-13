@@ -1,6 +1,11 @@
 import React from "react";
 import classes from "./Cockpit.css";
 
+// Props received from App component:
+// clicked function which is togglePersonsHandler
+// persons array from state
+// showPersons: true/false
+
 const cockpit = props => {
   const assignedClasses = [];
   let btnClass = "";

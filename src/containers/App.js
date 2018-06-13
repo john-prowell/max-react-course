@@ -14,6 +14,7 @@ class App extends Component {
     showPersons: false
   };
 
+  // Called when typing into input to change the name
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -23,20 +24,23 @@ class App extends Component {
       // make copy of the person in state array of persons
       ...this.state.persons[personIndex] // use spread operator in front to fetch it
     };
-
     // alternative way to make copy of a specfic person object
     // const person = Object.assign(this.persons[personIndex]);
 
+    // assign person.name the input value
     person.name = event.target.value;
 
-    // make copy of persons array
+    // make copy of persons array using the spread operator
     const persons = [...this.state.persons];
+
     // update specific person object in array with new person object
     persons[personIndex] = person;
 
+    // replace the persons array with updated persons
     this.setState({ persons: persons });
   };
 
+  // Called when name paragraph element is clicked on to delete person
   deletePersonHandler = personIndex => {
     // const persons = this.state.persons.slice(); // make copy array
     const persons = [...this.state.persons]; // spread operator make copy of persons array
@@ -44,6 +48,7 @@ class App extends Component {
     this.setState({ persons: persons }); // update state with new array
   };
 
+  // toggles showPersons state (true/false) when button clicked
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({
@@ -54,11 +59,12 @@ class App extends Component {
   render() {
     let persons = null; // no persons showing
     if (this.state.showPersons) {
-      // when button clicked and showPersons state updated to true
       persons = (
         <Persons
           persons={this.state.persons}
+          // when paragraph element of each person text clicked
           clicked={this.deletePersonHandler}
+          // when input typed into to change the name
           changed={this.nameChangeHandler}
         />
       );
@@ -69,8 +75,10 @@ class App extends Component {
         <Cockpit
           showPersons={this.state.showPersons}
           persons={this.state.persons}
+          // when button clicked and showPersons state updated to true
           clicked={this.togglePersonsHandler}
         />
+        {/* persons component displayed */}
         {persons}
       </div>
     );

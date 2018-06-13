@@ -1,6 +1,9 @@
 import React from "react";
 import classes from "./Person.css";
 
+// Props recieved from Persons component
+//
+
 const person = props => {
   return (
     <div className={classes.Person}>
